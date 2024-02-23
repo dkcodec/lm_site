@@ -1,0 +1,67 @@
+/* Стили для регистрации */
+
+.reg__form {
+  display: block;
+}
+
+.reg__box {
+  position: relative;
+  width: 100%;
+  height: 58px;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+.reg__input {
+  font-size: medium;
+  outline: none;
+  border: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #211a21;
+  border: 2px solid white;
+  border-radius: 5px;
+  color: #faf;
+  padding: 0.5rem 1rem;
+  font-weight: medium;
+  transition: background-color 0.4s, border 0.4s;
+}
+
+.reg__input::placeholder {
+  color: white;
+  transition: opacity 0.4s;
+}
+
+.reg__input:focus {
+  border: 2px solid white;
+}
+
+.reg__input:-webkit-autofill {
+  transition: background-color 6000s, color 6000s;
+}
+
+.reg__input:focus::placeholder {
+  opacity: 0;
+}
+
+.reg__input:focus + .reg__label,
+.reg__input:not(:placeholder-shown).reg__input:not(:focus) + .reg__label {
+  opacity: 1;
+  top: -16px;
+}
+
+.reg__label {
+  position: absolute;
+  top: -16px;
+  left: 10px;
+  color: white;
+  font-size: medium;
+  font-weight: medium;
+  background-color: #211a21;
+  padding-left: 8px;
+  padding-right: 8px;
+  pointer-events: none;
+  transition: top 0.4s, opacity 0.4s, background-color 0.4s;
+  opacity: 0;
+}

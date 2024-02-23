@@ -8,6 +8,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      // добаввил шрифт Comfortaa
+      fontFamily: {
+        sans: ['"Comfortaa", sans-serif'],
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
