@@ -3,9 +3,9 @@ import GitHubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 
-// из БД
-import User from "";
-import connect from "";
+// // из БД
+// import User from "DataBase";
+// import connect from "DataBase";
 
 export const authConfig: AuthOptions = {
   // Провайдеры
@@ -49,3 +49,6 @@ export const authConfig: AuthOptions = {
     }),
   ],
 };
+
+export const handler = NextAuth(authConfig);
+export { handler as GET, handler as POST };
