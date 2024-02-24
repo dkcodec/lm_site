@@ -23,8 +23,9 @@ const Register = () => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    const email = e.target[0].value;
-    const password = e.target[1].value;
+    const username = e.target[0].value;
+    const email = e.target[1].value;
+    const password = e.target[2].value;
 
     if (!isValidEmail(email)) {
       setError("This email is invalid");
@@ -36,6 +37,10 @@ const Register = () => {
       return;
     }
 
+    if (!username || username.length < 4) {
+      setError("This user name is invalid or length less than 4");
+    }
+
     try {
       const response = await fetch("", {
         method: "POST",
@@ -45,6 +50,7 @@ const Register = () => {
         body: JSON.stringify({
           email,
           password,
+          username,
         }),
       });
 
@@ -65,10 +71,24 @@ const Register = () => {
   return (
     <>
       <ParticleBackground />
-      <div className="font-sans flex max-h-screen flex-col items-center justify-between p-16">
+      <div className="font-sans flex max-h-screen flex-col items-center justify-between p-14">
         <div className="bg-[#211A21] p-8 rounded-3xl shadow-mxl shadow-[#Faf] w-96 border-2 border-[#faf]">
           <h1 className="text-4xl text-center font-semibold mb-8">Sign Up</h1>
           <form onSubmit={handleSubmit} className={styles.reg__form}>
+            <div className={styles.reg__box}>
+              <input
+                type="text"
+                name="user_name"
+                className={styles.reg__input}
+                id="username"
+                required
+                placeholder="Ueser name"
+              />
+              <label htmlFor="username" className={styles.reg__label}>
+                User name
+              </label>
+            </div>
+
             <div className={styles.reg__box}>
               <input
                 type="email"
