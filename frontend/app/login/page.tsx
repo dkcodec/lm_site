@@ -6,23 +6,25 @@ import styles from "./page.module.css";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
+import InputLogReg from "@/components/inputLogReg";
 
-// Страница Логина SSR
+// Страница Логина CSR
 
 // ParticleBackground - компоненет бля baackground Particle
 const Login = () => {
   const [error, setError] = useState("");
   const router = useRouter();
   // дает статус пользовтеля авторизован или нет (так называемый статус пользователя)
-  const session = useSession();
+  // const session = useSession();
+  const { data: session, status: sessionSatus } = useSession();
 
   // используя session через хук useEffect будет переадресация на Home page
   // добавил зависимости на изменение session и router
   useEffect(() => {
-    if (session?.status === "authenticated") {
-      router.replace("/home");
+    if (sessionSatus === "authenticated") {
+      router.replace("/");
     }
-  }, [session, router]);
+  }, [sessionSatus, router]);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -48,56 +50,65 @@ const Login = () => {
     }
   };
 
+  if (sessionSatus === "loading") {
+    return <h1 className=" place-content-center">Loagind...</h1>;
+  }
+
   return (
-    <>
-      <ParticleBackground />
-      <div className="font-sans flex max-h-screen flex-col items-center justify-between p-16">
-        <div className="bg-[#211A21] p-8 rounded-3xl shadow-mxl shadow-[#Faf] w-96 border-2 border-[#faf]">
-          <h1 className="text-4xl text-center font-semibold mb-8">Sign In</h1>
-          <form onSubmit={handleSubmit} className={styles.log__form}>
-            <div className={styles.log__box}>
-              <input
-                type="text"
-                name="user_email"
-                className={styles.log__input}
-                id="email"
-                required
-                placeholder="Email Address or User name"
-              />
-              <label htmlFor="email" className={styles.log__label}>
-                Email Address or User name
-              </label>
-            </div>
+    sessionSatus == "authenticated" && (
+      <>
+        <ParticleBackground />
+        <div className="font-sans flex max-h-screen flex-col items-center justify-between p-16 max-sm:pt-40 max-sm:pb-0">
+          <div className="bg-[#211a21a4] p-8 rounded-3xl shadow-3xl shadow-[#ffaaffa7] w-96 border-2 border-[#faf] backdrop-blur-xs max-sm:w-60 max-sm:p-5 ">
+            <h1 className="text-4xl text-center font-semibold mb-8 max-sm:mb-4 max-sm:text-2xl">
+              Sign In
+            </h1>
+            <form onSubmit={handleSubmit} className={styles.log__form}>
+              <div className={styles.log__box}>
+                <InputLogReg
+                  type="text"
+                  name="user_email"
+                  className={styles.log__input}
+                  id="email"
+                  placeholder="Email Address or User name"
+                />
+                <label htmlFor="email" className={styles.log__label}>
+                  Email Address or User name
+                </label>
+              </div>
 
-            <div className={styles.log__box}>
-              <input
-                type="password"
-                name="user_password"
-                className={styles.log__input}
-                id="password"
-                required
-                placeholder="Password"
-              />
-              <label htmlFor="password" className={styles.log__label}>
-                Password
-              </label>
-            </div>
+              <div className={styles.log__box}>
+                <InputLogReg
+                  type="password"
+                  name="user_password"
+                  className={styles.log__input}
+                  id="password"
+                  placeholder="Password"
+                />
+                <label htmlFor="password" className={styles.log__label}>
+                  Password
+                </label>
+              </div>
+
+              <button
+                type="submit"
+                className="block bg-[#211A21] ml-auto mr-auto w-1/2 border-2 text-white rounded-md text-xl hover:bg-opacity-0 mb-5 hover:text-[#Faf] hover:transition-colors hover:ease-in-out hover:duration-100 max-sm:mb-3 max-sm:text-sm"
+              >
+                {""}
+                Submit
+              </button>
+
+              <p className="text-red-600 text-center text-[16px] mb-4 max-sm:mb-2">
+                {error && error}
+              </p>
+            </form>
 
             <button
               type="submit"
-              className="block bg-[#211A21] ml-auto mr-auto w-1/2 border-2 text-white rounded-md text-xl hover:bg-opacity-0 mb-5 hover:text-[#Faf] hover:transition-colors hover:ease-in-out hover:duration-100"
-            >
-              {""}
-              Submit
-            </button>
-
-            <p className="text-red-600 text-center text-[16px] mb-4">
-              {error && error}
-            </p>
-
-            <button
-              type="submit"
-              className=" w-full bg-[#211A21] border-2 text-white rounded-md text-xl hover:bg-opacity-0 p-2 mb-2 hover:text-[#Faf] hover:transition-colors hover:ease-in-out hover:duration-100"
+              onClick={() => {
+                signIn("github");
+              }}
+              className=" w-full bg-[#211A21] border-2 text-white rounded-md text-xl hover:bg-opacity-0 p-2 mb-2 hover:text-[#Faf] hover:transition-colors hover:ease-in-out hover:duration-100 max-sm:text-sm"
             >
               <div className="flex justify-around">
                 <p className="block text-center">Sign In with GitHub</p>
@@ -117,19 +128,21 @@ const Login = () => {
                 </div>
               </div>
             </button>
-          </form>
 
-          <div className="text-sm text-center text-white mt-2 mb-2">— OR —</div>
+            <div className="text-sm text-center text-white mt-2 mb-2">
+              — OR —
+            </div>
 
-          <Link
-            href="/register"
-            className=" block text-sm text-center font-semibold hover:text-[#Faf] hover:transition-colors hover:ease-in-out hover:duration-100"
-          >
-            Create a new account
-          </Link>
+            <Link
+              href="/register"
+              className=" block text-sm text-center font-semibold hover:text-[#Faf] hover:transition-colors hover:ease-in-out hover:duration-100"
+            >
+              Create a new account
+            </Link>
+          </div>
         </div>
-      </div>
-    </>
+      </>
+    )
   );
 };
 

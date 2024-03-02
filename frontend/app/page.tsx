@@ -1,5 +1,10 @@
-import Image from "next/image";
+"use client";
+
+import { getServerSession } from "next-auth";
 import { Comfortaa } from "@next/font/google";
+import { redirect } from "next/navigation";
+import { signOut } from "next-auth/react";
+import NavBar from "@/components/navBar";
 
 const comfortaa = Comfortaa({
   subsets: ["cyrillic", "latin"],
@@ -7,12 +12,18 @@ const comfortaa = Comfortaa({
   variable: "--comfortaa",
 });
 
-export default function Home() {
+export default async function Home() {
+  const userSes = await getServerSession();
+  if (!userSes) {
+    redirect("/login");
+  }
+
   return (
     <>
-      <main className=" flex min-h-screen flex-col items-center justify-between p-24">
-        <h1>Home page</h1>
-      </main>
+      <header>
+        <NavBar />
+      </header>
+      <main className="flex min-h-screen flex-col items-center justify-between pl-24 pr-24 max-sm:pl-10 max-sm:pr-10"></main>
     </>
   );
 }

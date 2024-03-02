@@ -45,6 +45,12 @@
   opacity: 0;
 }
 
+.log__input:focus + .log__label,
+.log__input:not(:placeholder-shown).log__input:not(:focus) + .log__label {
+  opacity: 1;
+  top: -16px;
+}
+
 .log__label {
   position: absolute;
   top: -16px;
@@ -58,10 +64,19 @@
   pointer-events: none;
   transition: top 0.4s, opacity 0.4s, background-color 0.4s;
   opacity: 0;
+  border-radius: 5px;
 }
 
-.log__input:focus + .log__label,
-.log__input:not(:placeholder-shown).log__input:not(:focus) + .log__label {
-  opacity: 1;
-  top: -16px;
+@media not all and (min-width: 640px) {
+  .log__label {
+    font-size: 11px;
+  }
+  .log__input {
+    font-size: 11px;
+  }
+  .log__box {
+    margin-top: 10px;
+    margin-bottom: 16px;
+    height: 40px;
+  }
 }
