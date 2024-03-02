@@ -8,6 +8,16 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      // настройка блюра для логина и регистрации
+      backdropBlur: {
+        xs: "2px",
+      },
+
+      // настройка теней для лонгина и регистрации
+      boxShadow: {
+        "3xl": "0 0px 60px -20px rgba(0, 0, 0, 0.3)",
+      },
+
       // добаввил шрифт Comfortaa
       fontFamily: {
         sans: ['"Comfortaa", sans-serif'],
