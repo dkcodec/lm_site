@@ -2,22 +2,22 @@ package server
 
 import (
 	"context"
+	"github.com/dkcodec/lm_site/config"
 	"net/http"
 	"strconv"
-	"time"
 )
 
 type Server struct {
 	httpServer *http.Server
 }
 
-func (s *Server) Run(port int, handler http.Handler) error {
+func (s *Server) Run(conf *config.ServerConfig) error {
 	s.httpServer = &http.Server{
-		Addr:    ":" + strconv.Itoa(port),
-		Handler: handler,
-		//MaxHeaderBytes: 1 << 20,
-		ReadTimeout:  10 * time.Second,
-		WriteTimeout: 10 * time.Second,
+		Addr:           ":" + strconv.Itoa(conf.Port),
+		Handler:        conf.Handler,
+		MaxHeaderBytes: 1 << 20,
+		ReadTimeout:    conf.ReadTimeout,
+		WriteTimeout:   conf.WriteTimeout,
 	}
 
 	return s.httpServer.ListenAndServe()
