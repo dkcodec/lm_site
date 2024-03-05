@@ -1,0 +1,102 @@
+/*!*********************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[11].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[11].oneOf[7].use[3]!./app/login/page.module.css ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************/
+/* Стили для логина */
+
+.page_log__form__Wjist {
+  display: block;
+}
+
+.page_log__box__gYyRW {
+  position: relative;
+  display: block;
+  margin: 25px auto;
+  width: 100%;
+  height: 58px;
+}
+
+.page_log__input__6m0ko {
+  font-size: medium;
+  outline: none;
+  border: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #211a21;
+  border: 2px solid white;
+  border-radius: 5px;
+  color: #faf;
+  padding: 0.5rem 1rem;
+  font-weight: medium;
+  transition: background-color 0.4s, border 0.4s;
+}
+
+.page_log__input__6m0ko::-moz-placeholder {
+  color: white;
+  -moz-transition: opacity 0.4s;
+  transition: opacity 0.4s;
+}
+
+.page_log__input__6m0ko::placeholder {
+  color: white;
+  transition: opacity 0.4s;
+}
+
+.page_log__input__6m0ko:focus {
+  border: 2px solid white;
+}
+
+.page_log__input__6m0ko:-webkit-autofill {
+  -webkit-transition: background-color 6000s, color 6000s;
+  transition: background-color 6000s, color 6000s;
+}
+
+.page_log__input__6m0ko:focus::-moz-placeholder {
+  opacity: 0;
+}
+
+.page_log__input__6m0ko:focus::placeholder {
+  opacity: 0;
+}
+
+.page_log__input__6m0ko:not(:-moz-placeholder-shown).page_log__input__6m0ko:not(:focus) + .page_log__label__I88HX {
+  opacity: 1;
+  top: -16px;
+}
+
+.page_log__input__6m0ko:focus + .page_log__label__I88HX,
+.page_log__input__6m0ko:not(:placeholder-shown).page_log__input__6m0ko:not(:focus) + .page_log__label__I88HX {
+  opacity: 1;
+  top: -16px;
+}
+
+.page_log__label__I88HX {
+  position: absolute;
+  top: -16px;
+  left: 10px;
+  color: white;
+  font-size: medium;
+  font-weight: medium;
+  background-color: #211a21;
+  padding-left: 8px;
+  padding-right: 8px;
+  pointer-events: none;
+  transition: top 0.4s, opacity 0.4s, background-color 0.4s;
+  opacity: 0;
+  border-radius: 5px;
+}
+
+@media not all and (min-width: 640px) {
+  .page_log__label__I88HX {
+    font-size: 11px;
+  }
+  .page_log__input__6m0ko {
+    font-size: 11px;
+  }
+  .page_log__box__gYyRW {
+    margin-top: 10px;
+    margin-bottom: 16px;
+    height: 40px;
+  }
+}
+
