@@ -55,7 +55,7 @@ const Login = () => {
   }
 
   return (
-    sessionSatus == "authenticated" && (
+    sessionSatus !== "authenticated" && (
       <>
         <ParticleBackground />
         <div className="font-sans flex max-h-screen flex-col items-center justify-between p-16 max-sm:pt-40 max-sm:pb-0">
