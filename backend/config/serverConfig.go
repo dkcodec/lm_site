@@ -14,7 +14,7 @@ type ServerConfig struct {
 	WriteTimeout time.Duration
 }
 
-func InitServerConfig(hndr http.Handler) (*ServerConfig, error) {
+func LoadServerConfig(hdr http.Handler) (*ServerConfig, error) {
 	port, err := strconv.Atoi(os.Getenv("SERVER_PORT"))
 	readTimeout, err := strconv.Atoi(os.Getenv("SERVER_READ_TIMEOUT"))
 	writeTimeout, err := strconv.Atoi(os.Getenv("SERVER_WRITE_TIMEOUT"))
@@ -23,7 +23,7 @@ func InitServerConfig(hndr http.Handler) (*ServerConfig, error) {
 	}
 	return &ServerConfig{
 		Port:         port,
-		Handler:      hndr,
+		Handler:      hdr,
 		ReadTimeout:  time.Duration(readTimeout) * time.Second,
 		WriteTimeout: time.Duration(writeTimeout) * time.Second,
 	}, nil
